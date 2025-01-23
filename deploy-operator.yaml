@@ -10,7 +10,7 @@ spec:
   params:
     - description: Snapshot of the application
       name: SNAPSHOT
-      default: '{"components": [{"name":"test-app", "containerImage": "quay.io/example/repo:latest"}]}'
+      default: '{"components": [{"name":"test-app1", "containerImage": "quay.io/example/repo:latest"}]}'
       type: string
     - description: Namespace where the the Operator bundle will be deployed.
       name: NAMESPACE
