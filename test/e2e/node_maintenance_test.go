@@ -155,7 +155,7 @@ var _ = Describe("Starting Maintenance", func() {
 			maintenanceNodeName = getTestDeploymentNodeName()
 			nodeMaintenance = getNodeMaintenance(testWorkerMaintenance, maintenanceNodeName)
 		})
-		It("shoud put the node under maintenance", func() {
+		It("should put the node under maintenance", func() {
 			By("nm maintenance CR creation")
 			Expect(createCRIgnoreUnrelatedErrors(nodeMaintenance)).To(Succeed())
 
