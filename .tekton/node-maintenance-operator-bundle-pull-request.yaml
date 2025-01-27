@@ -8,15 +8,15 @@ metadata:
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: "3"
     pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "main" &&
-      (".tekton/node-maintenance-operator-component-pull-request.yaml".pathChanged() ||
+      (".tekton/node-maintenance-operator-bundle-pull-request.yaml".pathChanged() ||
       "Dockerfile".pathChanged() ||
       "bundle.Dockerfile".pathChanged())
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: node-maintenance-operator
-    appstudio.openshift.io/component: node-maintenance-operator-component
+    appstudio.openshift.io/component: node-maintenance-operator-bundle
     pipelines.appstudio.openshift.io/type: build
-  name: node-maintenance-operator-component-on-pull-request
+  name: node-maintenance-operator-bundle-on-pull-request
   namespace: rh-ee-slevi-tenant
 spec:
   params:
@@ -25,11 +25,11 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/rh-ee-slevi-tenant/node-maintenance-operator-component:on-pr-{{revision}}
+    value: quay.io/redhat-user-workloads/rh-ee-slevi-tenant/node-maintenance-operator-bundle:on-pr-{{revision}}
   - name: image-expires-after
-    value: 1w
+    value: 5d
   - name: dockerfile
-    value: Dockerfile
+    value: bundle.Dockerfile
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
