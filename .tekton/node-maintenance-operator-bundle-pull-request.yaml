@@ -4,16 +4,19 @@ metadata:
   annotations:
     build.appstudio.openshift.io/repo: https://github.com/Shai1-Levi/node-maintenance-operator?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
+    build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: "3"
-    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch
-      == "main"
+    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch == "main" &&
+      (".tekton/node-maintenance-operator-bundle-pull-request.yaml".pathChanged() ||
+      "Dockerfile".pathChanged() ||
+      "bundle.Dockerfile".pathChanged())
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: node-maintenance-operator
-    appstudio.openshift.io/component: node-maintenance-operator
+    appstudio.openshift.io/component: node-maintenance-operator-bundle
     pipelines.appstudio.openshift.io/type: build
-  name: node-maintenance-operator-on-push
+  name: node-maintenance-operator-bundle-on-pull-request
   namespace: rh-ee-slevi-tenant
 spec:
   params:
@@ -22,9 +25,11 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/rh-ee-slevi-tenant/node-maintenance-operator:{{revision}}
+    value: quay.io/redhat-user-workloads/rh-ee-slevi-tenant/node-maintenance-operator-bundle:on-pr-{{revision}}
+  - name: image-expires-after
+    value: 5d
   - name: dockerfile
-    value: Dockerfile
+    value: bundle.Dockerfile
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
