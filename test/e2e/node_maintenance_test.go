@@ -130,6 +130,7 @@ var _ = Describe("Starting Maintenance", func() {
 	})
 
 	Context("for a not existing node", func() {
+		
 		It("should fail", func() {
 			nodeName := "doesNotExist"
 			objectName = "test-unexisting"
