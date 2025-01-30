@@ -1,0 +1,30 @@
+apiVersion: appstudio.redhat.com/v1alpha1
+kind: ReleasePlan
+metadata:
+ labels:
+   release.appstudio.openshift.io/auto-release: 'true'
+   release.appstudio.openshift.io/standing-attribution: 'true'
+ name: publish
+ namespace: nmo-dev-workspace
+spec:
+ application: node-maintenance-operator-app
+ data:
+   mapping:
+     components:
+       - name: demo-component-1
+         repository: registry/destination-image-repository-1
+         tags: [latest]
+       - name: demo-component-2
+         repository: registry/destination-image-repository-2
+         tags: [latest]
+ tenantPipeline:
+   pipelineRef:
+     resolver: git
+     params:
+       - name: url
+         value: "https://github.com/Shai1-Levi/node-maintenance-operator.git"
+       - name: revision
+         value: 1f5a9fd14a0f4f5a42a088c478cdcd5bce0c4b51
+       - name: pathInRepo
+         value: "ReleasePlan.yaml"
+   serviceAccountName: appstudio-pipeline
