@@ -131,6 +131,7 @@ var _ = Describe("Starting Maintenance", func() {
 	})
 
 	Context("for a not existing node", func() {
+		
 		It("should fail", func() {
 			nodeName := "doesNotExist"
 			objectName = "test-unexisting"
@@ -156,7 +157,7 @@ var _ = Describe("Starting Maintenance", func() {
 			maintenanceNodeName = getTestDeploymentNodeName()
 			nodeMaintenance = getNodeMaintenance(testWorkerMaintenance, maintenanceNodeName)
 		})
-		It("shoud put the node under maintenance", func() {
+		It("should put the node under maintenance", func() {
 			By("nm maintenance CR creation")
 			Expect(createCRIgnoreUnrelatedErrors(nodeMaintenance)).To(Succeed())
 
