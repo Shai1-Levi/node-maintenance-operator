@@ -3,7 +3,7 @@ module github.com/medik8s/node-maintenance-operator
 go 1.23.0
 
 require (
-	github.com/go-logr/logr v1.4.2
+	github.com/go-logr/logr v1.4.3
 	github.com/medik8s/common v1.17.0
 	github.com/onsi/ginkgo/v2 v2.22.0
 	github.com/onsi/gomega v1.34.2
@@ -16,7 +16,6 @@ require (
 	k8s.io/kubectl v0.29.0
 	k8s.io/utils v0.0.0-20230726121419-3b25d923346b
 	sigs.k8s.io/controller-runtime v0.16.3
-
 )
 
 require (
