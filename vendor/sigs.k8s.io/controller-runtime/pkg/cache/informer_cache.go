@@ -190,6 +190,17 @@ func (ic *informerCache) getInformerForKind(ctx context.Context, gvk schema.Grou
 	return ic.Informers.Get(ctx, gvk, obj, &internal.GetOptions{})
 }
 
+// RemoveInformer deactivates and removes the informer from the cache.
+func (ic *informerCache) RemoveInformer(_ context.Context, obj client.Object) error {
+	gvk, err := apiutil.GVKForObject(obj, ic.scheme)
+	if err != nil {
+		return err
+	}
+
+	ic.Informers.Remove(gvk, obj)
+	return nil
+}
+
 // NeedLeaderElection implements the LeaderElectionRunnable interface
 // to indicate that this can be started without requiring the leader lock.
 func (ic *informerCache) NeedLeaderElection() bool {
@@ -210,7 +221,7 @@ func (ic *informerCache) IndexField(ctx context.Context, obj client.Object, fiel
 }
 
 func indexByField(informer Informer, field string, extractValue client.IndexerFunc) error {
-	indexFunc := func(objRaw interface{}) ([]string, error) {
+	indexFunc := func(objRaw any) ([]string, error) {
 		// TODO(directxman12): check if this is the correct type?
 		obj, isObj := objRaw.(client.Object)
 		if !isObj {
