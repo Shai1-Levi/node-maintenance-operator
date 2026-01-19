@@ -16,7 +16,6 @@ require (
 	k8s.io/kubectl v0.29.0
 	k8s.io/utils v0.0.0-20230726121419-3b25d923346b
 	sigs.k8s.io/controller-runtime v0.16.3
-
 )
 
 require (
@@ -71,8 +70,8 @@ require (
 	github.com/prometheus/common v0.44.0 // indirect
 	github.com/prometheus/procfs v0.10.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
-	github.com/spf13/cobra v1.7.0 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/cobra v1.10.2 // indirect
+	github.com/spf13/pflag v1.0.9 // indirect
 	github.com/xlab/treeprint v1.2.0 // indirect
 	go.starlark.net v0.0.0-20230525235612-a134d8f9ddca // indirect
 	go.uber.org/multierr v1.11.0 // indirect
